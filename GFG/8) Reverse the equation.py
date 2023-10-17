@@ -34,20 +34,19 @@ The string contains only the characters '0' - '9', '+', '-', '*', and '/'.
 
 class Solution:
     def reverseEqn(self, s):
-        s = s.replace(" ", "")
-        reversed_equation = []
-        i = 0
-        while i < len(s):
-            if s[i].isdigit() or s[i] == '.':
+        stack = []
+        l = 0
+        while l < len(s):
+            if s[l].isdigit():
                 num = ""
-                while i < len(s) and (s[i].isdigit() or s[i] == '.'):
-                    num += s[i]
-                    i += 1
-                reversed_equation.append(num)
+                while l < len(s) and s[l].isdigit():
+                    num += s[l]
+                    l += 1
+                stack.append(num)
             else:
-                reversed_equation.append(s[i])
-                i += 1
+                stack.append(s[l])
+                l += 1
     
-        reversed_equation = reversed_equation[::-1]
-        
-        return "".join(reversed_equation)
+        stack = stack[::-1]
+    
+        return "".join(stack)

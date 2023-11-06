@@ -1,19 +1,5 @@
 """
 Pick from both sides!
-Programming
-Arrays
-Very Easy
-51.2% Success
-
-758
-
-137
-
-Bookmark
-Asked In:
-Problem Description
- 
- 
 
 Given an integer array A of size N.
 

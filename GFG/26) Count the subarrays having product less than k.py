@@ -66,7 +66,6 @@ class Solution:
         ## TLE
         '''
         count = 0
-
         for left in range(n):
             product = 1
             for right in range(left, n):

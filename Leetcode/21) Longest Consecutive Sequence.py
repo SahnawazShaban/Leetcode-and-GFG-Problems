@@ -56,3 +56,20 @@ class Solution:
         
         return maxLen
         '''
+
+        '''
+        Time Complexity:
+
+        Converting the nums list to a set takes O(n) time, where n is the length of the list.
+        The outer loop runs through each unique element in the set once, so its time complexity is O(n).
+        The inner while loop, in the worst case, runs O(n) times overall because each element is processed at most once.
+        Therefore, the overall time complexity is O(n).
+
+        Space Complexity:
+
+        The additional space used is primarily for the set (num_set), which can have a maximum size of O(n) in the worst case if all elements are unique.
+        Other than that, the space used for variables (val, current_num, current_len, max_len) is constant.
+        Therefore, the overall space complexity is O(n).
+
+        In summary, the optimized solution has a time complexity of O(n) and a space complexity of O(n), providing a more efficient algorithm compared to the original solution, especially for large input arrays.
+        '''

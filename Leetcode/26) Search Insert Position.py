@@ -52,9 +52,9 @@ class Solution:
 
         ## Optimal
         n = len(nums)
-        l, r =0, n
+        l, r =0, n-1
 
-        while l < r:
+        while l <= r:
             mid = (l+r)//2
             if nums[mid] == target:
                 return mid 

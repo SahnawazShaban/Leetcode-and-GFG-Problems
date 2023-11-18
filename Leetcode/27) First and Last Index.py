@@ -92,6 +92,37 @@ class Solution:
         first = findFirst(nums, target)
         last = findLast(nums, target)
         return [first, last]
+
+        OR
+
+        n = len(nums)
+        left, right = -1, -1
+
+        # Binary search for the left boundary
+        l, r = 0, n - 1
+        while l <= r:
+            mid = l + (r - l) // 2
+            if nums[mid] == target:
+                left = mid
+                r = mid - 1
+            elif nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+
+        # Binary search for the right boundary
+        l, r = 0, n - 1
+        while l <= r:
+            mid = l + (r - l) // 2
+            if nums[mid] == target:
+                right = mid
+                l = mid + 1
+            elif nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+
+        return [left, right]
         '''
 
         # ------------------------------------

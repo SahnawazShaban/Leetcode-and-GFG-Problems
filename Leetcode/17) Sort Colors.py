@@ -39,6 +39,25 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        ## Brute Force
+
+        count = [0, 0, 0]  # Count of 0s, 1s, and 2s
+
+        # First pass: Count occurrences of each color
+        for num in nums:
+            count[num] += 1
+
+        # Second pass: Overwrite the array with the correct number of colors
+        i = 0
+        for color in range(3):
+            for _ in range(count[color]):
+                nums[i] = color
+                i += 1
+
+        # -----------------------------------------
+
+        ## Optimal
+
         n = len(nums)
         red, white, blue = 0, 0, n-1
 
@@ -54,14 +73,14 @@ class Solution:
                 blue -= 1
 
 
-# Time and Space Complexity
+        # Time and Space Complexity
 
-'''
-The provided code is an implementation of the Dutch National Flag problem, which is used to sort an array containing only three distinct elements (0, 1, and 2). Here's the analysis of its time and space complexity:
+        '''
+        The provided code is an implementation of the Dutch National Flag problem, which is used to sort an array containing only three distinct elements (0, 1, and 2). Here's the analysis of its time and space complexity:
 
-Time Complexity:
-The code uses a single pass through the array to sort it in-place, so the time complexity is O(n), where 'n' is the length of the nums array.
+        Time Complexity:
+        The code uses a single pass through the array to sort it in-place, so the time complexity is O(n), where 'n' is the length of the nums array.
 
-Space Complexity:
-The code uses a constant amount of extra space, regardless of the input size. It doesn't create any additional data structures that grow with the input size. Therefore, the space complexity is O(1), which means it's constant and not dependent on the size of the input array.
-'''
+        Space Complexity:
+        The code uses a constant amount of extra space, regardless of the input size. It doesn't create any additional data structures that grow with the input size. Therefore, the space complexity is O(1), which means it's constant and not dependent on the size of the input array.
+        '''

@@ -89,3 +89,17 @@ class Solution:
 
         return res
 
+        # ----------------------------------------
+
+        n = len(scores)
+        scores.sort()
+        l,r = 0,k-1
+        ans = float('inf')
+
+        while r < n:
+            ans = min(ans,scores[r]-scores[l])
+            l += 1
+            r += 1
+
+        return ans
+

@@ -1,104 +1,79 @@
 """
-162. Find Peak Element
+1901. Find a Peak Element II
 
 Medium
 
-A peak element is an element that is strictly greater than its neighbors.
+A peak element in a 2D grid is an element that is strictly greater than all of its adjacent neighbors to the left, right, top, and bottom.
 
-Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+Given a 0-indexed m x n matrix mat where no two adjacent cells are equal, find any peak element mat[i][j] and return the length 2 array [i,j].
 
-You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+You may assume that the entire matrix is surrounded by an outer perimeter with the value -1 in each cell.
 
-You must write an algorithm that runs in O(log n) time.
+You must write an algorithm that runs in O(m log(n)) or O(n log(m)) time.
 
  
 
 Example 1:
-Input: nums = [1,2,3,1]
-Output: 2
-Explanation: 3 is a peak element and your function should return the index number 2.
+
+Input: mat = [[1,4],[3,2]]
+Output: [0,1]
+Explanation: Both 3 and 4 are peak elements so [1,0] and [0,1] are both acceptable answers.
+
 
 Example 2:
-Input: nums = [1,2,1,3,5,6,4]
-Output: 5
-Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+
+Input: mat = [[10,20,15],[21,30,14],[7,16,32]]
+Output: [1,1]
+Explanation: Both 30 and 32 are peak elements so [1,1] and [2,2] are both acceptable answers.
  
 
 Constraints:
 
-1 <= nums.length <= 1000
--2^31 <= nums[i] <= 2^31 - 1
-nums[i] != nums[i + 1] for all valid i.
+m == mat.length
+n == mat[i].length
+1 <= m, n <= 500
+1 <= mat[i][j] <= 105
+No two adjacent cells are equal.
 
 """
 
 # SOLUTION
 
 class Solution:
-    def findPeakElement(self, nums: List[int]) -> int:
-        n = len(nums)
-        left, right = 0, n-1
-        ele = float('-inf')
+    # I use mid as a column in this function
+    def maxElement(self, mat, n, m, col):
+        maxEle = -1
+        index = -1
 
-        while left <= right:
-            if nums[left] >= nums[right]:
-                if ele < nums[left]:
-                    ele = nums[left]
-                    idx = left
-                left += 1
+        for i in range(n):
+            if mat[i][col] > maxEle:
+                maxEle = mat[i][col]
+                index = i
+
+        return index
+
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        n = len(mat)
+        m = len(mat[0])
+        low,high = 0, m-1
+
+        while low <= high:
+            mid = (low+high)//2
+
+            maxRowIndex = self.maxElement(mat,n,m,mid)
+            # if mid >= 0:
+            #     left = mat[maxRowIndex][mid-1]
+            # else:
+            #     left = -1
+            left = mat[maxRowIndex][mid-1] if mid-1 >= 0 else -1
+            right = mat[maxRowIndex][mid+1] if mid+1 < m else -1
+
+            if mat[maxRowIndex][mid]  > left and mat[maxRowIndex][mid] > right:
+                return [maxRowIndex,mid]
+            elif mat[maxRowIndex][mid] < left:
+                high = mid-1
             else:
-                if ele < nums[right]:
-                    ele = nums[right]
-                    idx = right
-                right -= 1
-        return idx
-
-        # -------------------------------------
-
-        left =0
-        right = len(nums)-1
-        while left < right:
-            mid = left + (right - left ) //2
-            if nums[mid] > nums[mid+1]: 
-                # Find First True i.e first elem where this condition will be True
-                right = mid # include mid # mid is potential solution 
-            else:
-                left = mid +1
-        return left
-
-        # -------------------------------------
-
-        left =0
-        right = len(nums)-1
-        while left < right:
-            mid = left + (right - left + 1) //2 # Right biased mid as left = mid in else condition # prevent infinite loop
-            if nums[mid] > nums[mid-1]: # True condition # go right # inc function # Last True 
-                left = mid # mid is a potential elem
-            else:
-                right = mid -1
-        return left
-
-        # ---------------------------------------
-
-        left =0
-        right = len(nums)-1
-        while(left < right):
-            mid = left +(right-left)//2
-            if nums[mid] <  nums[mid+1]: # False Condition # inc function # go right # Find First False
-			# i.e. find First elem when this if will be false
-                left = mid+1 # exclude mid 
-            else: 
-                right = mid
-        return left
-
-        # ----------------------------------------
-
-        left =0
-        right = len(nums)-1
-        while(left < right):
-            mid = left +(right-left+1)//2 # Right biased mid as left = mid in else condition # prevent infinite loop
-            if nums[mid] < nums[mid-1]: # False condition # Dec function # go left # Find Last False i.e the Last elem for which this condition will be False 
-                right = mid - 1
-            else: # decreasing so peak will be before mid or it can be mid
-                left = mid
-        return left
+                low = mid+1
+        
+        return [-1,-1]
+        

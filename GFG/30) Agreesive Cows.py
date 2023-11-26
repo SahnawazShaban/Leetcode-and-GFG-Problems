@@ -54,6 +54,59 @@ Constraints:
 # SOLUTION
 
 class Solution:
+    # Without using any inbuilt function
+
+    # Brute force
+    def sortArray(arr):
+        n = len(arr)
+        for i in range(1,n):
+            key = arr[i]
+            j = i-1
+            while j >= 0 and key < arr[j]:
+                arr[j+1] = arr[j]
+                j -= 1
+
+            arr[j+1] = key
+
+        return arr
+
+    def canWePlace(arr,dist,cows):
+        capacity = 1
+        last = arr[0]
+
+        for i in range(1,len(arr)):
+            if arr[i]-last >= dist:
+                capacity += 1
+                last = arr[i]
+
+        return capacity >= cows
+
+    def aggresiveCow(arr,cows):
+        n = len(arr)
+        sortArray(arr)
+
+        for i in range(1,arr[n-1]):
+            if canWePlace(arr,i,cows):
+                continue
+            else:
+                return i-1
+            
+    # ---------------------------------------
+
+    # Optimal Approach : Binary
+    def sortArray(arr):
+        n = len(arr)
+        for i in range(1,n):
+            key = arr[i]
+            j = i-1
+            while j >= 0 and key < arr[j]:
+                arr[j+1] = arr[j]
+                j -= 1
+
+            arr[j+1] = key
+
+        return arr
+    
     def canWePlace(self,stalls,mid,k):
         n = len(stalls)
         countCow = 1
@@ -67,7 +120,8 @@ class Solution:
         return countCow >= k
         
     def solve(self,n,k,stalls):
-        stalls.sort()
+        # stalls.sort()
+        sortArray(arr)
         low, high = 0, stalls[n-1]
         
         while low <= high:

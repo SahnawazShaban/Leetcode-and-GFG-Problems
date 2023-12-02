@@ -7,6 +7,7 @@ Example 1:
 Input
 4
 10 2 5 3
+
 Output
 True
 

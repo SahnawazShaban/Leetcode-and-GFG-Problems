@@ -9,6 +9,7 @@ Example 1:
 Input
 3
 3 0 1
+
 Output
 2
 

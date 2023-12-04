@@ -68,3 +68,16 @@ class Solution:
         
         return reverseListHead
     
+        # or
+        '''
+        if head == None or head.next == None:
+            return head
+            
+        newHead = self.reverseList(head.next)
+        headNext = head.next
+        headNext.next = head
+        head.next = None
+        
+        return newHead
+        '''
+    

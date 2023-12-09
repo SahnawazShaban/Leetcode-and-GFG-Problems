@@ -72,7 +72,26 @@ class Solution:
         ans = []
         board = [['.' for _ in range(n)] for _ in range(n)]
         solve(0, board, ans, n)
-        return ans
+        return and
+
+'''
+Time Complexity:
+The main function, solveNQueens, initializes an empty board and then calls the recursive helper function to solve to find all solutions.
+The solve function is a backtracking algorithm that explores all possible placements of queens on the board.
+In the worst case, the backtracking algorithm will explore all possible configurations, leading to a time complexity of O(N!), where N is the number of queens (size of the chessboard).
+Each recursive call in the solve function involves checking the safety of placing a queen, and the safety check involves traversing rows and columns, contributing to a constant factor.
+Overall, the time complexity is O(N!) with a moderate constant factor.
+
+Space Complexity:
+The space complexity mainly consists of the space required for the chessboard and the call stack during recursion.
+The chessboard is represented by a 2D list of size N x N, contributing O(N^2) space.
+The recursive calls use the call stack, and in the worst case (all queens placed successfully), the maximum depth of the call stack will be N.
+Therefore, the overall space complexity is O(N^2 + N) ≈ O(N^2).
+
+In summary, the time complexity is exponential (O(N!)) due to the nature of the backtracking algorithm, and the space complexity 
+is quadratic (O(N^2)). Keep in mind that these are theoretical worst-case complexities, and the actual performance may vary depending 
+on the specific input and the efficiency of the pruning strategy used in backtracking.
+'''
 
 # ------------------------------------
 

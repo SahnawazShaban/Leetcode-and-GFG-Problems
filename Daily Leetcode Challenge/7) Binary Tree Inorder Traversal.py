@@ -40,6 +40,7 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         # Solution - 1
+        
         '''
         if root == None:
             return []

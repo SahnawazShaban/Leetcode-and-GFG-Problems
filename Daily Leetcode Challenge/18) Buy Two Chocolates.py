@@ -58,3 +58,38 @@ class Solution:
 
         # If there is a deficit, return the original money amount
         return money
+    
+
+        # Time Complexity:
+        # The loop iterates through the prices list once, so the time complexity is O(n), where n is the length of the prices list.
+        
+        # Space Complexity:
+        # The space complexity is O(1) because the algorithm uses a constant amount of space for variables (first_min_val, second_min_val, leftover).
+
+
+        # -------------------------------------------
+
+        # Solution - 2
+
+        first = min(prices)
+        prices.remove(first)
+        second = min(prices)
+
+        leftover = money - (first + second)
+
+        return leftover if leftover >= 0 else money
+
+        '''
+        Time Complexity:
+
+        Finding the first minimum element using min(arr) takes O(n) time, where n is the length of the array.
+        Removing the first minimum element using arr.remove(min1) takes O(n) time in the worst case because it may need to shift elements after the removal point.
+        Finding the second minimum element using min(arr) again takes O(n) time.
+        Removing the second minimum element using arr.remove(min2) also takes O(n) time in the worst case.
+        Therefore, the overall time complexity of the remove_two_min function is O(n).
+
+        Space Complexity:
+
+        The space complexity is O(1) because the function does not use any additional data structures that grow with the input size. It only uses a constant amount of space for variables like min1, min2, and the loop variable.
+        '''
+        

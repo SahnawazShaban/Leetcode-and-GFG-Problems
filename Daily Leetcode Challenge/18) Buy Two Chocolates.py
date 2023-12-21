@@ -34,6 +34,14 @@ Constraints:
 
 class Solution:
     def buyChoco(self, prices: List[int], money: int) -> int:
+        # Solution - 1 - Brute Force
+        prices.sort()
+        res=money-(prices[0]+prices[1])
+        return money if res < 0 else res
+
+        # ----------------------------------------
+        # Solution - 2 - Optimal
+
         # Initialize variables to store the first and second minimum values
         first_min_val = float('inf')
         second_min_val = float('inf')
@@ -58,19 +66,12 @@ class Solution:
 
         # If there is a deficit, return the original money amount
         return money
-    
-
-        # Time Complexity:
-        # The loop iterates through the prices list once, so the time complexity is O(n), where n is the length of the prices list.
         
-        # Space Complexity:
-        # The space complexity is O(1) because the algorithm uses a constant amount of space for variables (first_min_val, second_min_val, leftover).
-
 
         # -------------------------------------------
 
-        # Solution - 2
-
+        # Solution - 3 - Optimal
+        
         first = min(prices)
         prices.remove(first)
         second = min(prices)
@@ -78,7 +79,8 @@ class Solution:
         leftover = money - (first + second)
 
         return leftover if leftover >= 0 else money
-
+        
+        
         '''
         Time Complexity:
 
@@ -92,4 +94,5 @@ class Solution:
 
         The space complexity is O(1) because the function does not use any additional data structures that grow with the input size. It only uses a constant amount of space for variables like min1, min2, and the loop variable.
         '''
+
         

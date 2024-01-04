@@ -78,31 +78,31 @@ class Solution:
         
         # Using Level Order / BFS
         
-        if root is None:  # Base case: An empty tree has a height of 0
+        if root == None:
             return 0
-    
-        # Initialize a deque to store nodes for level-order traversal
-        queue = deque([root])
-        level = 0  # Keep track of the current level
-    
-        while queue:
-            # Number of nodes in the current level
-            level_size = len(queue)
-    
-            # Process all nodes in the current level
-            for _ in range(level_size):
-                node = queue.popleft()
-    
-                # Add children of the current node to the queue for the next level
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-    
-            # Increment the level after processing all nodes in the current level
-            level += 1
-    
-        return level  # Return the final level count, which represents the height
+           
+        wrap_list = deque([root])
+        next_level = 1
+        level = 0
+         
+        while wrap_list:
+            node = wrap_list.popleft()
+            
+            if node.left:
+                wrap_list.append(root.left)
+            
+            if node.right:
+                wrap_list.append(root.right)
+             
+            next_level -= 1
+            
+            if next_level == 0:
+                level += 1
+                 
+                next_level = len(wrap_list)
+             
+        return level
+
         
         '''
         Time Complexity:

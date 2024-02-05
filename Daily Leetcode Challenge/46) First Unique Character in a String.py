@@ -36,7 +36,8 @@ class Solution:
             dict_str[char] = dict_str.get(char, 0) + 1
 
         '''
-        temp = {s[i]: i for i in range(len(s))}
+        temp = {s[i]: i for i in range(len(s))} 
+        # {'l': 0, 'e': 7, 't': 3, 'c': 4, 'o': 5, 'd': 6}
         for key, val in dict_str.items():
             if val == 1:
                 return temp[key]

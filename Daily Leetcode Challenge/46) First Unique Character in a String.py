@@ -35,9 +35,14 @@ class Solution:
         for char in s:
             dict_str[char] = dict_str.get(char, 0) + 1
 
+        for idx in range(len(s)):
+            if dict_str[s[idx]] == 1:
+                return idx
+
+        return -1
+
         '''
-        temp = {s[i]: i for i in range(len(s))} 
-        # {'l': 0, 'e': 7, 't': 3, 'c': 4, 'o': 5, 'd': 6}
+        temp = {s[i]: i for i in range(len(s))}
         for key, val in dict_str.items():
             if val == 1:
                 return temp[key]
@@ -46,12 +51,13 @@ class Solution:
         '''
 
         # OR
-
+        '''
         for i in range(len(s)):
             if dict_str[s[i]] == 1:
                 return i
 
         return -1
+        '''
     
 
 '''

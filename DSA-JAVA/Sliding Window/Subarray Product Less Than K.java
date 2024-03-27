@@ -54,3 +54,7 @@ class Solution {
         return count;
     }
 }
+
+//Approach  : Standard Sliding window Problem
+//T.C : O(N)
+//S.C : O(1)

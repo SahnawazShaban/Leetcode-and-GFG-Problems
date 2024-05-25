@@ -21,7 +21,7 @@ class Student{
     }
 }
 
-public class Main {
+public class Constructor {
     public static void main(String[] args) {
         // Creating object of class
 

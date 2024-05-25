@@ -1,0 +1,104 @@
+git branch -b branch-name
+git status
+git add 
+git commit -m "Message"
+git push origin branch-name
+
+git branch : To list all branches in your repository
+git branch <branch_name> : To create a new branch
+git branch -d <branch_name> : To delete a branch (be careful with this, as it permanently deletes the branch)
+
+git checkout <branch_name> : This command is used to switch between branches or create a new branch and switch to it. To switch to an existing branch
+git checkout -b <new_branch_name> : To create and switch to a new branch in one step
+
+
+Use the following command to delete a folder and its contents:
+git rm -r foldername
+
+To copy and paste a folder from one branch to another branch in Git, you can follow these steps:
+
+1.Checkout the source branch:
+Make sure you are on the source branch from which you want to copy the folder.
+
+git checkout source-branch
+
+2.Copy the folder:
+You can use the git checkout command with the path of the folder you want to copy. This will copy the contents of the folder to your working directory.
+
+git checkout source-branch -- path/to/folder
+Replace source-branch with the name of the source branch and path/to/folder with the relative path to the folder you want to copy.
+
+3.Create or switch to the target branch:
+If the target branch already exists, switch to it. If it doesn't exist, create the branch first, and then switch to it.
+
+To create a new branch and switch to it:
+
+bash
+Copy code
+git checkout -b target-branch
+Replace target-branch with the name you want to give to the new branch.
+
+4.Add and commit the copied folder:
+Stage and commit the copied folder to the target branch.
+
+bash
+Copy code
+git add path/to/folder
+git commit -m "Copy folder from source-branch"
+
+
+5.Push the changes (if needed):
+If you want to make the changes available to a remote repository, push the changes to the remote repository.
+
+bash
+Copy code
+git push origin target-branch
+Now, the folder from the source branch is copied to the target branch. You can switch to the target branch to work with the copied folder as needed.
+
+-----------------------------------------------------------
+
+Shahnawaz@DESKTOP-567BC03 MINGW64 ~/PycharmProjects/StudySync (project)
+$ git status
+On branch project
+Your branch is ahead of 'origin/project' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+Shahnawaz@DESKTOP-567BC03 MINGW64 ~/PycharmProjects/StudySync (project)
+$ git status
+On branch project
+Your branch is ahead of 'origin/project' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+Shahnawaz@DESKTOP-567BC03 MINGW64 ~/PycharmProjects/StudySync (project)
+$ git checkout project
+Already on 'project'
+Your branch is ahead of 'origin/project' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Shahnawaz@DESKTOP-567BC03 MINGW64 ~/PycharmProjects/StudySync (project)
+$ git push origin project
+Enumerating objects: 19, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 1.16 KiB | 1.16 MiB/s, done.
+Total 9 (delta 6), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (6/6), completed with 5 local objects.
+To https://github.com/SahnawazShaban/StudySync.git
+   77583f5..2c53f69  project -> project
+
+Shahnawaz@DESKTOP-567BC03 MINGW64 ~/PycharmProjects/StudySync (project)
+$ git status
+On branch project
+Your branch is up to date with 'origin/project'.
+
+nothing to commit, working tree clean
+
+
+
+
+

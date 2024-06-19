@@ -67,31 +67,59 @@ class Node {
 }
 */
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    // Function to reverse a linked list.
-    Node reverseList(Node head) {
-        // Solution - 1
-        Node cur = head;
-        Node prev = null;
+    public ListNode reverseList(ListNode head) {
 
-        while (cur != null) {
-            Node temp = cur.next;
+        //SOLUTION 1
+
+        // ListNode temp = null;
+
+        // while(head != null){
+        //     ListNode Next = head.next;
+        //     head.next = temp;
+        //     temp = head;
+        //     head = Next;
+        // }
+        // return temp;
+
+        //SOLUTION 2
+
+        ListNode cur = head;
+        ListNode prev = null;
+
+        while(cur != null){
+            ListNode temp = cur.next;
             cur.next = prev;
             prev = cur;
             cur = temp;
         }
+
         return prev;
 
-        // Solution - 2 - Recursive Approach
-        if (head == null || head.next == null) {
-            return head;
-        }
+        // ------------------------------
 
-        Node newHead = reverseList(head.next);
-        Node headNext = head.next;
-        headNext.next = head;
-        head.next = null;
+        /* Recursive Solution */
+        return reverse(head, null);
+    }
 
-        return newHead;
+    private ListNode reverse(ListNode cur, ListNode prev) {
+        if (cur == null)
+            return prev;
+        ListNode temp = cur.next;
+        cur.next = prev;
+        return reverse(temp, cur);
     }
 }
+// null<-1<-2<-3
+//               c  n
+//             p

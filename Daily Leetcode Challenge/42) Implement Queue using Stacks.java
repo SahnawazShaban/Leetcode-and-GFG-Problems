@@ -1,4 +1,4 @@
-"""
+/*
 232. Implement Queue using Stacks
 
 Easy
@@ -42,49 +42,72 @@ All the calls to pop and peek are valid.
 
 Follow-up: Can you implement the queue such that each operation is amortized O(1) time complexity? In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.
 
-"""
+*/
 
 
-# SOLUTION
+// SOLUTION
 
-class MyQueue:
-    def __init__(self):
-        self.s1 = []
-        self.s2 = []
+class MyQueue {
 
-    def push(self, x: int) -> None:
-        while self.s1:
-            self.s2.append(self.s1.pop())
-        
-        self.s1.append(x)
-
-        while self.s2:
-            self.s1.append(self.s2.pop())
-
-    def pop(self) -> int:
-        return self.s1.pop()
-
-    def peek(self) -> int:
-        return self.s1[-1]
-
-    def empty(self) -> bool:
-        return len(self.s1) == 0
-
-
-# Your MyQueue object will be instantiated and called as such:
-# obj = MyQueue()
-# obj.push(x)
-# param_2 = obj.pop()
-# param_3 = obj.peek()
-# param_4 = obj.empty()
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
     
+    public void push(int x) {
+        s1.push(x);
+    }
+    
+    public int pop() {
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+        }
+        return s2.pop();
+    }
+    
+    public int peek() {
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+        }
+        return s2.peek();
+    }
+    
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+}
 
-'''
-Push(x):
-Time Complexity: O(n)
-Space Complexity: O(n)
 
-Pop(), peek(), empty():
-Time Complexity: O(1)
-Space Complexity: O(1)
-'''
+// --------------------
+
+class MyQueue {
+
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
+    
+    public void push(int x) {
+        while(!s1.isEmpty()){
+            s2.push(s1.pop());
+        }
+
+        s1.push(x);
+        
+        while (!s2.isEmpty()){
+            s1.push(s2.pop());
+        }
+    }
+    
+    public int pop() {
+        return s1.pop();
+    }
+    
+    public int peek() {
+        return s1.peek();
+    }
+    
+    public boolean empty() {
+        return s1.isEmpty();
+    }
+}

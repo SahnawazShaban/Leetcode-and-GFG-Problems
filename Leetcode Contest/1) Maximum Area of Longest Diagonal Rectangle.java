@@ -1,4 +1,4 @@
-"""
+/*
 10035. Maximum Area of Longest Diagonal Rectangle
 
 Difficulty:Easy
@@ -30,26 +30,31 @@ Constraints:
 dimensions[i].length == 2
 1 <= dimensions[i][0], dimensions[i][1] <= 100
 
-"""
+*/
 
-# SOLUTION
+// SOLUTION
 
-import math
-class Solution:
-    def areaOfMaxDiagonal(self, dimensions: List[List[int]]) -> int:
-        n = len(dimensions)
-        result = 0
+import java.util.List;
+
+public class Solution {
+    public int areaOfMaxDiagonal(List<int[]> dimensions) {
+        int n = dimensions.size();
+        int result = 0;
         
-        max_len = 0
-        for i in range(n):
-            a = dimensions[i][0]
-            b = dimensions[i][1]
-            length = math.sqrt(a*a + b*b)
+        double maxLen = 0;
+        for (int i = 0; i < n; i++) {
+            int a = dimensions.get(i)[0];
+            int b = dimensions.get(i)[1];
+            double length = Math.sqrt(a * a + b * b);
             
-            if max_len < length:
-                max_len = length
-                result = a*b
-            elif max_len == length:
-                result = max(result, a*b)
-                
-        return result
+            if (maxLen < length) {
+                maxLen = length;
+                result = a * b;
+            } else if (maxLen == length) {
+                result = Math.max(result, a * b);
+            }
+        }
+        
+        return result;
+    }
+}

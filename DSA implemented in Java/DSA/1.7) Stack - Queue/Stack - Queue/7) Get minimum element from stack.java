@@ -1,6 +1,5 @@
-"""
+/*
 Get minimum element from stack
-
 Medium
 
 You are given N elements and your task is to Implement a Stack in which you can get a minimum element in O(1) time.
@@ -40,33 +39,44 @@ Expected Auxiliary Space: O(1) for all the 3 methods.
 Constraints:
 1 <= Number of queries <= 100
 1 <= values of the stack <= 100
+*/
 
-"""
+// SOLUTION
 
-# SOLUTION
+import java.util.Stack;
 
-class stack:
-    def __init__(self):
-        self.s=[]
-        self.temp=[]
-        self.minEle=None
-
-    def push(self,x):
-        # temp work is that to store min value on top of the stack
-        if len(self.temp) == 0 or x <= self.temp[-1]:
-            self.temp.append(x)
-        self.s.append(x)
-
-    def pop(self):
-        if not self.s:
-            return -1
-        if self.s[-1] == self.temp[-1]:
-            self.temp.pop(-1)
-            
-        return self.s.pop()
-        
-    def getMin(self):
-        if not self.temp:
-            return -1
-        return self.temp[-1]
+class StackWithMin {
+    private Stack<Integer> s;
+    private Stack<Integer> temp;
     
+    public StackWithMin() {
+        s = new Stack<>();
+        temp = new Stack<>();
+    }
+
+    public void push(int x) {
+        // If the temp stack is empty or the current element is less than or equal to the top of the temp stack
+        if (temp.isEmpty() || x <= temp.peek()) {
+            temp.push(x);
+        }
+        s.push(x);
+    }
+
+    public int pop() {
+        if (s.isEmpty()) {
+            return -1;  // Indicating stack is empty
+        }
+        // If the popped element is the minimum element, pop it from temp as well
+        if (s.peek().equals(temp.peek())) {
+            temp.pop();
+        }
+        return s.pop();
+    }
+
+    public int getMin() {
+        if (temp.isEmpty()) {
+            return -1;  // Indicating no elements in the stack
+        }
+        return temp.peek();
+    }
+}

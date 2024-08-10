@@ -1,6 +1,5 @@
-"""
+/*
 Next Greater Element
-
 Medium
 
 Given an array arr[ ] of size N having elements, the task is to find the next greater element for each element of the array in order of their appearance in the array.
@@ -41,61 +40,69 @@ Constraints:
 1 ≤ N ≤ 10^6
 0 ≤ Ai ≤ 10^(18)
 
+*/
 
-"""
+// SOLUTION
 
-# SOLUTION
+import java.util.Stack;
 
-class Solution:
-    def nextLargerElement(self,arr,n):
-        # Solution - 1 - Brute Force 
-        # j depends on i, so try to solve using stack
-        '''
-        for i in range(n-1):
-            flag = True
-            for j in range(i+1,n):
-                if arr[i] < arr[j]:
-                    arr[i] = arr[j]
-                    flag = False
-                    break
-            if flag:
-                arr[i] = -1
-                
-        arr[-1] = -1
-        
-        return arr
-        '''
-        
-        # ----------------------------------
-        
-        # Solution - 2 - Better
-        
-        if n == 0:
-            return 0
-            
-        if n == 1:
-            return [-1]
-            
-        stack = [arr[-1]]
-        
-        for i in range(n-2, -1, -1):
-            temp = arr[i]
-            
-            while stack and temp >= stack[-1]:
-                stack.pop()
-                
-            if not stack:
-                arr[i] = -1
-            else:
-                arr[i] = stack[-1]
-                
-            stack.append(temp)
-            
-        arr[-1] = -1
-        
-        return arr
+class Solution {
     
-'''
+    // Solution 1 - Brute Force
+    public int[] nextLargerElementBruteForce(int[] arr, int n) {
+        for (int i = 0; i < n - 1; i++) {
+            boolean flag = true;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[i] < arr[j]) {
+                    arr[i] = arr[j];
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                arr[i] = -1;
+            }
+        }
+        arr[n - 1] = -1;
+        return arr;
+    }
+
+    // Solution 2 - Better (Stack-based)
+    public int[] nextLargerElement(int[] arr, int n) {
+        if (n == 0) {
+            return new int[0];
+        }
+
+        if (n == 1) {
+            return new int[]{-1};
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(arr[n - 1]);
+
+        for (int i = n - 2; i >= 0; i--) {
+            int temp = arr[i];
+
+            while (!stack.isEmpty() && temp >= stack.peek()) {
+                stack.pop();
+            }
+
+            if (stack.isEmpty()) {
+                arr[i] = -1;
+            } else {
+                arr[i] = stack.peek();
+            }
+
+            stack.push(temp);
+        }
+
+        arr[n - 1] = -1;
+
+        return arr;
+    }
+}
+
+/*
 Time Complexity:
 The time complexity is O(n), where n is the size of the input array. In the worst case, you iterate through each element in the array once. Within each iteration, the while loop (inside the for loop) may cause some elements to be popped from the stack, but each element is processed at most once.
 
@@ -103,4 +110,4 @@ Space Complexity:
 The space complexity is also O(n). In the worst case, the stack can have at most n elements, where n is the size of the input array. This occurs when the array is sorted in non-decreasing order.
 
 Additionally, the result array arr is modified in-place, and its space complexity is O(1) because it doesn't depend on the size of the input but only on a constant number of variables.
-'''
+*/

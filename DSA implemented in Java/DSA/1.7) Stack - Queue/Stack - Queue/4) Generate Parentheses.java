@@ -1,10 +1,8 @@
-"""
+/*
 Generate Parentheses
-
 Medium
 
 Given an integer N representing the number of pairs of parentheses, the task is to generate all combinations of well-formed(balanced) parentheses.
-
 
 Example 1:
 Input:
@@ -31,11 +29,11 @@ Expected Auxiliary Space: O(2*N*X), X = Number of valid Parenthesis.
 Constraints:
 1 ≤ N ≤ 12
 
-"""
+*/
 
-# SOLUTION
+// SOLUTION
 
-# Solution - 1
+// Solution - 1
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,13 +72,13 @@ public class Solution {
 }
 
         
-        # Time and Space Complexity
+        // Time and Space Complexity
         
-        # Time Complexity: O(2^n)
-        # Space Complexity: O(2n + 2^n)
+        // Time Complexity: O(2^n)
+        // Space Complexity: O(2n + 2^n)
         
-# ----------------------------------------------
-# Solution - 2
+// ----------------------------------------------
+// Solution - 2
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +114,7 @@ public class Solution {
 }
 
 
-'''
+/*
 Time Complexity : The time complexity is determined by the number of recursive calls made by the `solve` function. In each recursive call, either an open parenthesis or a close parenthesis is added to the partial solution (`op`). The base case is reached when both the open and close counts are zero. In each recursive call, we either decrement the open count or the close count. Therefore, the total number of recursive calls is 2^n, where nnn is the input value.
 As a result, the time complexity is O(2^n).
 
@@ -128,5 +126,5 @@ In summary:
 
 *   Time Complexity: O(2^n)
 *   Space Complexity: O(2n + 2^n)
-'''
+*/
         

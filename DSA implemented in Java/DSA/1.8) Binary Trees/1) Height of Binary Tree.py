@@ -81,15 +81,15 @@ class Solution:
         if root == None:
             return 0
            
-        wrap_list = deque([root])
+        wrap_list = deque([root]) # Deque<TreeNode> dq = new ArrayDeque<>();
         next_level = 1
         level = 0
          
         while wrap_list:
-            node = wrap_list.popleft()
+            node = wrap_list.popleft() # dq.pollFirst();
             
             if node.left:
-                wrap_list.append(root.left)
+                wrap_list.append(root.left) # dq.offer(temp.left);
             
             if node.right:
                 wrap_list.append(root.right)

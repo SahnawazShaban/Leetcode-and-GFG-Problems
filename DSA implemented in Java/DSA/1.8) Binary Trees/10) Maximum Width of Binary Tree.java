@@ -1,4 +1,4 @@
-"""
+/*
 662. Maximum Width of Binary Tree
 
 Medium
@@ -33,51 +33,74 @@ Constraints:
 The number of nodes in the tree is in the range [1, 3000].
 -100 <= Node.val <= 100
 
-"""
+*/
 
-# SOLUTION
+// Solution
 
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 
-from collections import deque
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        Queue<Integer> qInt = new LinkedList<>();
+        
+        q.offer(root);
+        qInt.offer(1);
 
-class Solution:
-    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
+        int maxi = 0;
 
-        ans = 0
-        q = deque([(root, 0)])
+        while(!q.isEmpty()){
+            int n = q.size();
+            int R = 0;
+            int L = 0;
 
-        while q:
-            size = len(q)
-            min_num = q[0][1]  # Starting index for current level
+            for (int i = 0; i < n; i++){
+                TreeNode temp = q.poll();
+                int idx = qInt.poll();
 
-            first, last = 0, 0
-            for i in range(size):
-                cur_id = q[0][1] - min_num  # Corrected indentation
-                node = q.popleft()[0]  # Corrected indentation
+                if(i == 0){
+                    L = idx;
+                }
 
-                if i == 0:
-                    first = cur_id
-                if i == size - 1:
-                    last = cur_id
+                if(i == n-1){
+                    R = idx;
+                }
 
-                if node.left:
-                    q.append((node.left, cur_id * 2))
-                if node.right:
-                    q.append((node.right, cur_id * 2 + 1))
+                if(temp.left != null){
+                    q.offer(temp.left);
+                    qInt.offer(idx*2);
+                }
 
-            ans = max(ans, last - first + 1)
+                if(temp.right != null){
+                    q.offer(temp.right);
+                    qInt.offer(idx*2+1);
+                }
+            }
+            maxi = Math.max(maxi, R-L+1);
+        }
+        return maxi;
+    }
+}
 
-        return ans
 
-'''
+/*
 Time Complexity:
 The time complexity of the widthOfBinaryTree function is O(N), where N is the number of nodes in the binary tree.
 
@@ -103,4 +126,4 @@ In the worst case, the space required would be proportional to the maximum width
 Note:
 
 The space complexity can be further optimized by using a single integer to represent the indices, as the corrected index is derived from the previous level's minimum index. This would reduce the space complexity to O(1) for the deque.
-'''
+*/
